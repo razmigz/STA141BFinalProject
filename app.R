@@ -13,7 +13,7 @@ library(DT)
 library(shinythemes)
 library(styler)
 
-# style_file("C:/Users/razmi/OneDrive/Desktop/ShinyApp/appBACKUP5.R")
+style_file("C:/Users/razmi/OneDrive/Desktop/ShinyApp/app.R")
 
 # web scrape pokemon names to use later
 link <- read_html("https://pokemondb.net/pokedex/national")
@@ -153,7 +153,7 @@ ui <- fluidPage(
           plotOutput("shiny_front"),
 
           sidebarLayout(
-            tags$h4("Table of Pokemon's Stats"), 
+            tags$h4("Table of Pokemon's Stats"),
             dataTableOutput("Pokemon")
           )
         ),
@@ -431,8 +431,9 @@ server <- function(input, output, session) {
     # obviously, nothing costs 0 pokedollars; we will fix this by saying they are not for sale!
     if (items.content$cost == 0) {
       cat(
-        toTitleCase(items.content$name), "is not for sale!",
-        toTitleCase(items.content$name), "does the following:\n", items.content$effect_entries$short_effect
+        toTitleCase(items.content$name), "is not for sale!", paste0(
+          toTitleCase(items.content$name), " does the following:\n", items.content$effect_entries$short_effect
+        )
       )
     } else {
       cat(
@@ -444,7 +445,7 @@ server <- function(input, output, session) {
           "pokedollars.\n",
           toTitleCase(items.content$name),
           paste0(
-            "does the following:\n", items.content$effect_entries$short_effect
+            " does the following:\n", items.content$effect_entries$short_effect
           )
         )
       )
