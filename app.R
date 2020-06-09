@@ -11,9 +11,6 @@ library(tools)
 library(rvest)
 library(DT)
 library(shinythemes)
-library(styler)
-
-style_file("C:/Users/razmi/OneDrive/Desktop/ShinyApp/app.R")
 
 # web scrape pokemon names to use later
 link <- read_html("https://pokemondb.net/pokedex/national")
@@ -398,23 +395,24 @@ server <- function(input, output, session) {
 
     if (move.info$damage_class$name == "status") {
       cat(toTitleCase(name.of.move), "is a", paste0(
-        toTitleCase(move.info$type$name), "type move",
-        "\n The damage type of", toTitleCase(name.of.move), "is", move.info$damage_class$name,
-        "\n ", toTitleCase(name.of.move), "does not do damage",
-        "\n", toTitleCase(name.of.move), "can be used", move.info$pp, "times until there are no power points left",
-        "\n", toTitleCase(name.of.move), "is", pr.status,
-        "\n", "Here is a description of", c(name.of.move, paste0(":")), move.info$effect_entries$effect
+        toTitleCase(move.info$type$name), " type move",
+        "\nThe damage type of ", toTitleCase(name.of.move), " is ", move.info$damage_class$name,
+        "\n", toTitleCase(name.of.move), " does not do damage",
+        "\n", toTitleCase(name.of.move), " can be used ", move.info$pp, " times until there are no power points left",
+        "\n", toTitleCase(name.of.move), " is ", pr.status,
+        "\n", "Here is a description of ", toTitleCase(name.of.move), ": ", move.info$effect_entries$effect
       ))
     } else {
       cat(
-        toTitleCase(name.of.move), "is a", toTitleCase(move.info$type$name), "type move",
-        "\nThe damage type of", toTitleCase(name.of.move), "is", move.info$damage_class$name,
-        "\n", toTitleCase(name.of.move), "has", move.info$power, "base damage",
-        "\n", toTitleCase(name.of.move), "has", move.info$accuracy, paste0("% accuracy"),
-        "\n", toTitleCase(name.of.move), "can be used", move.info$pp, "times until there are no power points left",
-        "\n", toTitleCase(name.of.move), "is", pr.status,
-        "\nHere is a description of", c(name.of.move, paste0(":")), move.info$effect_entries$effect
-      )
+        toTitleCase(name.of.move), "is a", paste0(
+        toTitleCase(move.info$type$name), " type move",
+        "\nThe damage type of ", toTitleCase(name.of.move), " is ", move.info$damage_class$name,
+        "\n", toTitleCase(name.of.move), " has ", move.info$power, " base damage",
+        "\n", toTitleCase(name.of.move), " has ", move.info$accuracy, paste0("% accuracy"),
+        "\n", toTitleCase(name.of.move), " can be used ", move.info$pp, " times until there are no power points left",
+        "\n", toTitleCase(name.of.move), " is ", pr.status,
+        "\nHere is a description of ", toTitleCase(name.of.move), ": ", move.info$effect_entries$effect
+      ))
     }
   })
   #######################################################################################################
