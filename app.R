@@ -132,6 +132,7 @@ ui <- fluidPage(
         width = 800,
         src = "https://media.giphy.com/media/IfuEfxTfeorNS/giphy.gif"
       ),
+      #give a short description of what the app does
       tags$h3("Hello and welcome to PokeInfo! You can use this app to get some basic information on Pokemon,
                          moves, and items by clicking the appropriate tabs!")
     ),
@@ -171,7 +172,9 @@ ui <- fluidPage(
       mainPanel(
         # prepare output for information on user-chosen move using dropdown menu
         selectInput("move_name", "Pick a move to get some information about it:", toTitleCase(all.moves$.)),
+        verticalLayout(
         verbatimTextOutput("Move")
+        )
       )
     ),
     # tab 3: get info about an item
@@ -455,3 +458,7 @@ server <- function(input, output, session) {
 
 # Run the application
 shinyApp(ui = ui, server = server)
+
+# references: https://rstudio.github.io/DT/shiny.html
+# https://stackoverflow.com/questions/17215789/extract-a-substring-according-to-a-pattern
+# Professor Chu Shing Lai's lecture notes for STA141B
